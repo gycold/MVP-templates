@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<template
+    format="5"
+    revision="5"
+    name="MVP Fragment"
+    minApi="14"
+    minBuildApi="14"
+    description="Creates a new MVP fragment">
+
+    <category value="Fragment" />
+
+    <formfactor value="Mobile" />
+
+    <parameter
+        id="fragmentClass"
+        name="Fragment Name"
+        type="string"
+        constraints="class|unique|nonempty"
+        default="Fragment"
+        help="The name of the fragment class to create" />
+
+    <parameter
+        id="generateLayout"
+        name="Generate Layout File"
+        type="boolean"
+        default="true"
+        help="If true, a layout file will be generated" />
+
+    <parameter
+        id="fragmentLayout"
+        name="Fragment Layout Name"
+        type="string"
+        constraints="layout|unique|nonempty"
+        suggest="fragment_${classToResource(fragmentClass)}"
+        default="fragment_"
+        visibility="generateLayout"
+        help="The name of the layout to create for the fragment" />
+
+    <parameter
+        id="presenterClass"
+        name="Presenter Name"
+        type="string"
+        constraints="class|unique|nonempty"
+        suggest="${underscoreToCamelCase(classToResource(fragmentClass))}Presenter"
+        default="Presenter"
+        help="The name of the presenter class to create" />
+
+    <parameter
+        id="viewClass"
+        name="View Name"
+        type="string"
+        constraints="class|unique|nonempty"
+        suggest="I${underscoreToCamelCase(classToResource(fragmentClass))}View"
+        default="IView"
+        help="The name of the view class to create" />
+
+    <parameter
+        id="packageName"
+        name="Package name"
+        type="string"
+        constraints="package"
+        default="com.mycompany.myapp" />
+
+    <parameter
+        id="fragmentPackage"
+        name="Fragment package path"
+        type="string"
+        constraints="package"
+        suggest="ui.fragment"
+        default="ui.fragment"
+        help="The package path for the fragment" />
+
+    <parameter
+        id="presenterPackage"
+        name="Presenter package path"
+        type="string"
+        constraints="package"
+        suggest="presenter"
+        default="presenter"
+        help="The package path for the presenter" />
+
+    <parameter
+        id="viewPackage"
+        name="View package path"
+        type="string"
+        constraints="package"
+        suggest="view"
+        default="view"
+        help="The package path for the view" />
+
+    <!-- 128x128 thumbnails relative to template.xml -->
+    <thumbs>
+        <!-- default thumbnail is required -->
+        <thumb>template_mvp_fragment.png</thumb>
+    </thumbs>
+
+    <globals file="globals.xml.ftl" />
+    <execute file="recipe.xml.ftl" />
+
+</template>
